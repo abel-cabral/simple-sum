@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { AppFullscreen } from 'quasar'
 
 export default {
   data () {
@@ -56,9 +55,6 @@ export default {
       valueB: '',
       operator: ''
     }
-  },
-  created () {
-    AppFullscreen.request()
   },
   methods: {
     addNumTo (number) {
