@@ -6,7 +6,7 @@
   "author": "Abel Cabral de Arruda <abel@ibm.com>",
   "scripts": {
     "build": "quasar build -m pwa",
-    "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "heroku-postbuild": "yarn && yarn build",
     "start": "node server.js"
   },

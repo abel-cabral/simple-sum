@@ -90,6 +90,7 @@ export default {
         this.operator = this.valueB = ''
         this.setDisplay(calcs)
         this.history += ` ${this.valueB}`
+        return calcs
       }
     },
     setDisplay (someValue) {
