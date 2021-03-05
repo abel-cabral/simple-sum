@@ -10,7 +10,7 @@ describe('Data Display Interaction', () => {
     wrapper.destroy()
   })
 
-  it('Test number keys', async () => {
+  it('Test number keys', () => {
     const wrapper = mount(Main)
     let keys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     const buttons = wrapper.findAll('.button')
@@ -21,7 +21,7 @@ describe('Data Display Interaction', () => {
     wrapper.destroy()
   })
 
-  it('Test operations keys', async () => {
+  it('Test operations keys', () => {
     const wrapper = mount(Main)
     let keys = ['+', '-', '*', '/', '^']
     const buttons = wrapper.findAll('.button')
@@ -32,7 +32,7 @@ describe('Data Display Interaction', () => {
     wrapper.destroy()
   })
 
-  it('Test Special Keys', async () => {
+  it('Test Special Keys', () => {
     const wrapper = mount(Main)
     let keys = ['.', 'C', '=']
     const buttons = wrapper.findAll('.button')
