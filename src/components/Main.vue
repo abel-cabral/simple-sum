@@ -6,7 +6,7 @@
         <div class="calc-body">
           <div class="calc-screen">
             <div class="calc-operation">{{history}}</div>
-            <div class="calc-typed" id="display">{{display}}</div>
+            <div class="calc-typed" id="display" :style="{ 'font-size': fontSize + 'px' }">{{display}}</div>
           </div>
           <div class="calc-button-row">
             <div class="button c" @click="clear">C</div>
@@ -49,6 +49,7 @@
 export default {
   data () {
     return {
+      fontSize: 40,
       display: 0,
       history: '',
       valueA: '',
@@ -77,30 +78,41 @@ export default {
       }
     },
     operation () {
-      if (this.valueA && this.valueB && this.operator) {
-        /* eslint no-eval: 0 */
-        let calcs = ''
-        if (this.operator === '^') {
-          calcs = Math.pow(this.valueA, this.valueB)
-        } else {
-          calcs = eval(this.valueA + this.operator + this.valueB)
-        }
-
-        this.valueA = calcs
-        this.operator = this.valueB = ''
-        this.setDisplay(calcs)
-        this.history += ` ${this.valueB}`
-        return calcs
+      if (!this.valueA || !this.valueB || !this.operator) {
+        return // Previne a execução se algum valor for inválido
+      }
+      try {
+        const result = this.calculador(this.valueA, this.operator, this.valueB)
+        this.updateCalculationState(result)
+      } catch (error) {
+        this.displayError(error)
       }
     },
+    updateCalculationState (result) {
+      this.operator = this.valueB = ''
+      this.valueA = result.toString()
+      this.history += ` ${this.valueB}`
+      this.setDisplay(result)
+    },
+    displayError (error) {
+      // Aqui você pode implementar uma lógica para exibir erros na UI
+      console.error(error)
+      this.setDisplay('Erro: ' + error.message)
+    },
     setDisplay (someValue) {
-      const stringSize = String(someValue).length
-      if (stringSize < 14) {
-        this.display = someValue
-      } else {
-        this.display = 'Error'
-        this.clear(false)
+      this.fontSizeFunc(someValue)
+      this.display = someValue
+    },
+    // calcula dinamicamente o tamanho da fonte, para exibir o máximo de numero no display
+    fontSizeFunc (newValue) {
+      const baseCharacters = 17
+      const baseFontSize = 48
+
+      if (String(newValue).length < baseCharacters) {
+        return
       }
+
+      this.fontSize = (baseFontSize * baseCharacters) / String(newValue).length
     },
     clear (resetDisplay = true) {
       if (resetDisplay) {
@@ -110,6 +122,30 @@ export default {
       this.valueA = ''
       this.valueB = ''
       this.operator = ''
+    },
+    calculador (valueA, operator, valueB) {
+      const numA = parseFloat(valueA)
+      const numB = parseFloat(valueB)
+
+      switch (operator) {
+        case '+':
+          return numA + numB
+        case '-':
+          return numA - numB
+        case '*':
+          return numA * numB
+        case '%':
+          return (numA / 100) * numB
+        case '^':
+          return Math.pow(this.valueA, this.valueB)
+        case '/':
+          if (numB === 0) {
+            return 'erro, divisão por 0'
+          }
+          return numA / numB
+        default:
+          return 'Operador inválido'
+      }
     }
   }
 }

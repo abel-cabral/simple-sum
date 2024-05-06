@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { Quasar, AppFullscreen } from 'quasar'
+import Quasar, { AppFullscreen } from 'quasar'
 
 import routes from './routes'
 

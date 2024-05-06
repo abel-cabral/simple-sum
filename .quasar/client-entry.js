@@ -43,13 +43,7 @@ import 'app/src-pwa/register-service-worker.js'
 
 
 
-Vue.config.devtools = true
-Vue.config.productionTip = false
 
-
-
-console.info('[Quasar] Running PWA.')
-console.info('[Quasar] PWA: Use devtools > Application > "Bypass for network" to not break Hot Module Replacement while developing.')
 
 
 
