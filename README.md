@@ -59,4 +59,4 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 Abel Cabral de Arruda - abel-cabral@outlook.com
 
-Projeto Link: [https://github.com/abel-cabral/calculadora-pwa](https://github.com/abel-cabral/simple-sum)
+Projeto Link: [https://github.com/abel-cabral/simple-sum](https://github.com/abel-cabral/simple-sum)
