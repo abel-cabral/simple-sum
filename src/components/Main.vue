@@ -10,7 +10,7 @@
           </div>
           <div class="calc-button-row">
             <div class="button c" @click="clear">C</div>
-            <div class="button l" @click="addOperator('^')">^</div>
+            <div class="button l" @click="addOperator('()')">^</div>
             <div class="button l"  @click="addOperator('%')">%</div>
             <div class="button l" @click="addOperator('/')">/</div>
           </div>
@@ -33,9 +33,9 @@
             <div class="button l" @click="addOperator('+')">+</div>
           </div>
           <div class="calc-button-row">
-            <div class="buttonB l" @click="addNumTo(0)">0</div>
+            <div class="button buttonB" @click="addNumTo(0)">0</div>
             <div class="button" @click="addNumTo('.')">.</div>
-            <div class="button l" @click="operation">=</div>
+            <div class="button l final" @click="operation">=</div>
           </div>
         </div>
       </div>

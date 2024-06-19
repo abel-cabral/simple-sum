@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 WORKDIR /pwa
 ADD . /pwa
 RUN npm install -g @quasar/cli
