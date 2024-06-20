@@ -18,9 +18,3 @@ FROM nginx:latest
 
 # Copia os arquivos do estágio de build para o diretório de documentos do Nginx
 COPY --from=build /pwa/dist/pwa/ /usr/share/nginx/html
-
-# Copia o arquivo de configuração do Nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Instala o Certbot para Nginx
-RUN apt-get update && apt-get install -y certbot python3-certbot-nginx
