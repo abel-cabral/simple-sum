@@ -1,3 +1,7 @@
+# Limita Capacidade de Recursos no Build da Imagem
+ARG MAX_CPU=0.5
+ARG MAX_MEMORY=256M
+
 # Estágio 1: Construção do projeto PWA
 FROM node:16 AS build
 
