@@ -29,7 +29,6 @@ body {
 
 .calc-body {
   width: 500px; /* Largura máxima */
-  height: 600px;
   border: 1px solid #3a4655;
   box-shadow: 0 8px 50px -7px #000;
 }
