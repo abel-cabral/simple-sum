@@ -6,12 +6,15 @@
         <div class="calc-body">
           <div class="calc-screen">
             <div class="calc-operation">{{history}}</div>
-            <div class="calc-typed" id="display" :style="{ 'font-size': fontSize + 'px' }">{{display}}</div>
+            <div class="painel">
+              <div class="calc-typed" id="display">{{display}}</div>
+              <div class="button" @click="clear()">⌫</div>
+            </div>
           </div>
           <div class="calc-button-row">
-            <div class="button c" @mousedown="startPress" @mouseup="handleMouseUp" @mouseleave="cancelPress">C</div>
+            <div class="button c" @click="clearAll()">C</div>
             <div class="button l" @click="addVal('(')">(</div>
-            <div class="button l"  @click="addVal(')')">)</div>
+            <div class="button l" @click="addVal(')')">)</div>
             <div class="button l" @click="addVal('/')">/</div>
           </div>
           <div class="calc-button-row">
@@ -131,22 +134,29 @@ export default {
       this.clearAll()
     },
     clear () {
-      // Ação a ser executada em um clique rápido
-      if (!this.value || this.value.length === 1) {
+      // Limpar o último caractere
+      if (!this.value) {
+        return
+      }
+
+      if (typeof this.value === 'number') {
+        this.value = this.value.toString()
+      }
+
+      this.value = this.value.slice(0, -1)
+
+      if (!this.value || this.value < 0) {
         this.clearAll()
       } else {
-        this.clearLast()
+        this.history = this.history.slice(0, -1)
       }
+
+      this.setDisplay(this.value)
     },
     clearAll () {
       this.history = ''
       this.value = ''
       this.display = 0
-    },
-    clearLast () {
-      // Limpar o último caractere
-      this.value = this.value.slice(0, -1)
-      this.setDisplay(this.value)
     }
   }
 }
