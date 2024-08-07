@@ -24,11 +24,17 @@ register(process.env.SERVICE_WORKER_FILE, {
   },
 
   updatefound (/* registration */) {
-    // console.log('New content is downloading.')
+    console.log('New content is downloading.')
   },
 
-  updated (/* registration */) {
-    // console.log('New content is available; please refresh.')
+  updated (registration) {
+    console.log('New content is available; applying update.')
+    registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+    registration.waiting.addEventListener('statechange', (e) => {
+      if (e.target.state === 'activated') {
+        window.location.reload()
+      }
+    })
   },
 
   offline () {

@@ -6,6 +6,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
+const path = require('path')
 
 module.exports = function (/* ctx */) {
   return {
@@ -112,8 +113,11 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxPluginMode: 'InjectManifest', // 'GenerateSW' ou 'InjectManifest'
+      workboxOptions: {
+        swSrc: path.resolve(__dirname, 'src-pwa/custom-service-worker.js'), // Caminho absoluto
+        swDest: 'service-worker.js'
+      },
       manifest: {
         name: 'Simple Sum',
         short_name: 'Simple Sum',
