@@ -1,17 +1,26 @@
-name: Simple-Sum Build
+name: Simple-Sum Build and Docker Push
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
+      # Usar Node.js
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16.x'
+
+      # Instalar dependências do projeto
       - run: npm i
+
+      # Rodar o build do projeto
       - run: npm run build
+
+      # Fazer o build da imagem Docker
+      - name: Build Docker image
+        run: docker build -t ozteps/simple-sum:latest .
