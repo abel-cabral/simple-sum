@@ -1,4 +1,4 @@
-name: Simple-Sum Build and Docker Push
+name: Build and Push Docker Image
 
 on: [push]
 
@@ -21,6 +21,22 @@ jobs:
       # Rodar o build do projeto
       - run: npm run build
 
-      # Fazer o build da imagem Docker
+      # Executar os próximos passos apenas se estiver na branch master
+      - name: Check if on master branch
+        if: github.ref == 'refs/heads/master'
+        run: echo "On master branch"
+
+      # Fazer o build da imagem Docker, mas apenas se estiver na master
       - name: Build Docker image
+        if: github.ref == 'refs/heads/master'
         run: docker build -t ozteps/simple-sum:latest .
+
+      # Fazer login no Docker Hub (apenas na branch master)
+      - name: Docker Login
+        if: github.ref == 'refs/heads/master'
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # Fazer push da imagem para o Docker Hub (apenas na branch master)
+      - name: Push Docker image
+        if: github.ref == 'refs/heads/master'
+        run: docker push ozteps/simple-sum:latest
