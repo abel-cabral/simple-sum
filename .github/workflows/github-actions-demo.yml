@@ -21,22 +21,22 @@ jobs:
       # Rodar o build do projeto
       - run: npm run build
 
-      # Executar os próximos passos apenas se estiver na branch master
-      - name: Check if on master branch
-        if: github.ref == 'refs/heads/master'
-        run: echo "On master branch"
+      # Executar os próximos passos apenas se estiver na branch main
+      - name: Check if on main branch
+        if: github.ref == 'refs/heads/main'
+        run: echo "On main branch"
 
-      # Fazer o build da imagem Docker, mas apenas se estiver na master
+      # Fazer o build da imagem Docker, mas apenas se estiver na main
       - name: Build Docker image
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: docker build -t ozteps/simple-sum:latest .
 
-      # Fazer login no Docker Hub (apenas na branch master)
+      # Fazer login no Docker Hub (apenas na branch main)
       - name: Docker Login
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # Fazer push da imagem para o Docker Hub (apenas na branch master)
+      # Fazer push da imagem para o Docker Hub (apenas na branch main)
       - name: Push Docker image
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: docker push ozteps/simple-sum:latest
