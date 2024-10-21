@@ -6,7 +6,7 @@
   --text-color: #fff;
   --border-color: #3C4857;
   --screen-background: #3A4655;
-  --text-operator: #2987ff;
+  --text-operator: #26a69a;
 }
 
 * {
@@ -111,7 +111,7 @@ body {
 }
 
 .button.c {
-  color: #D95D4E;
+  color: #d94e5f;
   background: #404D5E;
 }
 
