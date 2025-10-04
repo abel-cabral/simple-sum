@@ -7,7 +7,7 @@ WORKDIR /pwa
 ADD . /pwa
 
 # Instala o Quasar CLI globalmente e as dependências do projeto
-RUN npm install -g @quasar/cli@2.4.1 --force
+RUN npm install -g @quasar/cli@1.15.4
 
 # Compila o projeto para produção
 RUN quasar build -m pwa
