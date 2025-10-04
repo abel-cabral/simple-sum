@@ -1,19 +1,45 @@
-# Estágio 1: Construção do projeto PWA
+# =========================
+# Estágio 1: Build da PWA
+# =========================
 FROM node:16 AS build
 
-WORKDIR /pwa
+WORKDIR /app
 
-# Copia todos os arquivos do diretório atual para o diretório /pwa no container
-ADD . /pwa
+# Copia package.json e package-lock.json
+COPY package*.json ./
 
-# Instala o Quasar CLI globalmente e as dependências do projeto
-RUN npm install -g @quasar/cli@1.15.4
+# Instala dependências
+RUN npm install -g @quasar/cli@2.4.1
+RUN npm install
 
-# Compila o projeto para produção
-RUN quasar build -m pwa
+# Copia todo o código
+COPY . .
 
-# Estágio 2: Configuração do servidor HTTP
-FROM nginx:latest
+# Build da PWA
+RUN npm run build
 
-# Copia os arquivos do estágio de build para o diretório de documentos do Nginx
-COPY --from=build /pwa/dist/pwa/ /usr/share/nginx/html
+# =========================
+# Estágio 2: Servir a PWA
+# =========================
+FROM node:16-alpine
+
+WORKDIR /app
+
+# Copia package.json e package-lock.json
+COPY package*.json ./
+
+# Instala somente dependências de produção
+RUN npm install --only=production
+
+# Copia o build da PWA do estágio anterior
+COPY --from=build /app/dist/pwa ./dist/pwa
+
+# Copia o server.js
+COPY server.js .
+
+# Expõe a porta 80
+ENV PORT=80
+EXPOSE 80
+
+# Inicia o servidor
+CMD ["node", "server.js"]
