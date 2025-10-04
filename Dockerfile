@@ -3,7 +3,7 @@ ARG MAX_CPU=0.5
 ARG MAX_MEMORY=256M
 
 # Estágio 1: Construção do projeto PWA
-FROM node:22 AS build
+FROM node:16 AS build
 
 WORKDIR /pwa
 
@@ -11,7 +11,7 @@ WORKDIR /pwa
 ADD . /pwa
 
 # Instala o Quasar CLI globalmente e as dependências do projeto
-RUN npm install -g @quasar/cli \
+RUN npm install -g @quasar/cli@2.4.1 \
     && yarn
 
 # Compila o projeto para produção
