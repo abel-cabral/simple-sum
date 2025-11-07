@@ -23,7 +23,7 @@ Progressive Web Apps (PWAs) são um tipo de aplicação software entregue atrav�
 
 ## Como Executar Localmente
 
-Para executar este projeto localmente, siga os seguintes passos:
+Para executar este projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório:
 ```bash
