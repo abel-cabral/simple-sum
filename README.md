@@ -51,12 +51,12 @@ Visite `http://localhost:8080` no seu navegador para acessar a aplicação.
 
 Contribuições são sempre bem-vindas! Veja `CONTRIBUTING.md` para saber como começar.
 
-## Licença
-
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
 ## Contato
 
 Abel Cabral de Arruda - abel-cabral@outlook.com
 
 Projeto Link: [https://github.com/abel-cabral/simple-sum](https://github.com/abel-cabral/simple-sum)
+
+## Licença
+
+Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
